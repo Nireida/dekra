@@ -1,0 +1,108 @@
+<div class="container">
+  <h2>List of users</h2>
+
+  <button mat-raised-button color="primary" (click)="addUser()">
+    <mat-icon>add</mat-icon>
+    new user
+  </button>
+  <div class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource || []" class="material-table">
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> username</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.username }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="surnames">
+        <th mat-header-cell *matHeaderCellDef> Surnames</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.surnames }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> email</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.email }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="password">
+        <th mat-header-cell *matHeaderCellDef> password</th>
+        <td mat-cell *matCellDef="let row">
+          ••••••••
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef> age</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.age }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> status</th>
+        <td  mat-cell *matCellDef="let row">
+          {{ row.active ? 'Active' : 'Not' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastLogin">
+        <th mat-header-cell *matHeaderCellDef>last login date</th>
+        <td mat-cell *matCellDef="let row">
+          @if (row.lastLogin) {
+            {{ row.lastLogin | date:'short'}}
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="creationDate">
+        <th mat-header-cell *matHeaderCellDef>creation date</th>
+        <td mat-cell *matCellDef="let row">
+          @if (row.creationDate) {
+            {{ row.creationDate | date:'short'}}
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td  mat-cell *matCellDef="let row">
+          <button mat-icon-button color="accent" (click)="editUser(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteUser(row.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    @if(totalLength === 0) {
+      <div class="no-data">
+        No data to show
+      </div>
+    }
+    <mat-paginator
+      [length]="totalLength"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[8]"
+      [pageIndex]="pageIndex"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+      aria-label="Select page of users">
+    </mat-paginator>
+  </div>
+</div>

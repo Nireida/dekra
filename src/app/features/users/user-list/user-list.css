@@ -1,0 +1,21 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  min-width: 600px;
+}
+
+.material-table {
+  border-bottom: 1px solid gray;
+}
+
+.no-data {
+  text-align: center;
+  padding: 50px;
+  border-bottom: 2px solid gray;
+}
